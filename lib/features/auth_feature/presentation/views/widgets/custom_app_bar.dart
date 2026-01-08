@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:login_and_register_app/core/utils/app_styles.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key, required this.title});
@@ -24,10 +25,7 @@ class CustomAppBar extends StatelessWidget {
         SizedBox(height: 20.h),
         Divider(thickness: 1, color: Colors.grey.shade300),
         SizedBox(height: 20.h),
-        Text(
-          "start",
-          style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
-        ),
+        Text("start", style: AppStyles.headerStyle),
       ],
     );
   }

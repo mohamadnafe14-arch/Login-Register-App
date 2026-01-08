@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:login_and_register_app/core/utils/app_router.dart';
+import 'package:login_and_register_app/core/utils/app_styles.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/manager/cubits/auth_cubit/auth_cubit.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_app_bar.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_button.dart';
@@ -38,12 +39,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               SizedBox(height: 40.h),
               CustomAppBar(title: "Login"),
               Row(
-                children: const [
-                  Text(
-                    'Email',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                ],
+                children: const [Text('Email', style: AppStyles.headerStyle)],
               ),
               SizedBox(height: 20.h),
               CustomTextFormField(
@@ -64,10 +60,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               SizedBox(height: 20.h),
               Row(
                 children: const [
-                  Text(
-                    'Password',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
+                  Text('Password', style: AppStyles.headerStyle),
                 ],
               ),
               SizedBox(height: 20.h),

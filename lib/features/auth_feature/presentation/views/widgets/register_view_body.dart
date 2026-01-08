@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:login_and_register_app/core/utils/app_router.dart';
+import 'package:login_and_register_app/core/utils/app_styles.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/manager/cubits/auth_cubit/auth_cubit.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_app_bar.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_button.dart';
@@ -47,17 +48,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             children: [
               SizedBox(height: 40.h),
               CustomAppBar(title: "Register"),
-              Row(
-                children: [
-                  Text(
-                    'Email',
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
+              Row(children: [Text('Email', style: AppStyles.headerStyle)]),
               SizedBox(height: 20.h),
               CustomTextFormField(
                 hintText: "Enter your email",
@@ -74,17 +65,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 prefixIcon: Icons.email,
               ),
               SizedBox(height: 20.h),
-              Row(
-                children: [
-                  Text(
-                    'Name',
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
+              Row(children: [Text('Name', style: AppStyles.headerStyle)]),
               SizedBox(height: 20.h),
               CustomTextFormField(
                 hintText: "Enter your name",
@@ -99,17 +80,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 prefixIcon: Icons.person,
               ),
               SizedBox(height: 20.h),
-              Row(
-                children: [
-                  Text(
-                    'Password',
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
+              Row(children: [Text('Password', style: AppStyles.headerStyle)]),
               SizedBox(height: 20.h),
               CustomTextFormField(
                 controller: passwordController,
@@ -131,13 +102,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               SizedBox(height: 20.h),
               Row(
                 children: [
-                  Text(
-                    'confirm password',
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  Text('confirm password', style: AppStyles.headerStyle),
                 ],
               ),
               SizedBox(height: 20.h),
