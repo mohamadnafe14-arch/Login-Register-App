@@ -17,7 +17,7 @@ class RegisterViewBody extends StatefulWidget {
 class _RegisterViewBodyState extends State<RegisterViewBody> {
   late GlobalKey<FormState> formKey;
   String? email, name, password, confirmPassword;
-  bool isSecure = true, isConfirmSecure = true;
+  bool isSecure = true, isConfirmSecure = true, isLoading = false;
   @override
   void initState() {
     formKey = GlobalKey<FormState>();
@@ -153,6 +153,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   }
                 },
                 text: "Register",
+                loading: isLoading,
               ),
               Footer(
                 firstText: "Already have an account",

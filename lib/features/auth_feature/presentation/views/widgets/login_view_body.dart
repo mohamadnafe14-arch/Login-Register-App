@@ -17,6 +17,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   late GlobalKey<FormState> formKey;
   String? email, password;
   bool isSecure = true;
+  bool isLoading = false;
   @override
   void initState() {
     formKey = GlobalKey<FormState>();
@@ -97,6 +98,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     );
                   }
                 },
+                loading: isLoading,
               ),
               SizedBox(height: 20.h),
               Footer(

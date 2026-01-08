@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.text, required this.onPressed});
+  const CustomButton({super.key, required this.text, required this.onPressed, required this.loading});
   final String text;
   final void Function()? onPressed;
+  final bool loading;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -16,7 +17,7 @@ class CustomButton extends StatelessWidget {
         backgroundColor: Colors.deepPurple,
       ),
       onPressed: onPressed,
-      child: Text(text),
+      child: loading ? const CircularProgressIndicator(color: Colors.white) : Text(text),
     );
   }
 }
