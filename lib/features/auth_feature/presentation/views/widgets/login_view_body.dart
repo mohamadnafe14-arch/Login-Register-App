@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:login_and_register_app/core/utils/app_router.dart';
+import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_app_bar.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_button.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_text_form_field.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/footer.dart';
@@ -29,26 +32,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
             children: [
-              Text(
-                "Login and register app",
-                style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20.h),
-              Text(
-                "Login to your account",
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                ),
-              ),
-              SizedBox(height: 20.h),
-              Divider(thickness: 1, color: Colors.grey.shade300),
-              SizedBox(height: 20.h),
-              Text(
-                "start",
-                style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
-              ),
+              CustomAppBar(title: "Login"),
               Row(
                 children: const [
                   Text(
@@ -115,7 +99,13 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 },
               ),
               SizedBox(height: 20.h),
-              Footer(firstText: "No account?", secondeText: "Register", onPressed:(){})             
+              Footer(
+                firstText: "No account?",
+                secondeText: "Register",
+                onPressed: () {
+                  GoRouter.of(context).push(AppRouter.registerRoute);
+                },
+              ),
             ],
           ),
         ),
