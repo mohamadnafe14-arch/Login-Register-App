@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:login_and_register_app/core/utils/app_router.dart';
+import 'package:login_and_register_app/features/auth_feature/presentation/manager/cubits/auth_cubit/auth_cubit_cubit.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_app_bar.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_button.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_text_form_field.dart';
@@ -143,17 +145,34 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 onTap: () => setState(() => isConfirmSecure = !isConfirmSecure),
               ),
               SizedBox(height: 20.h),
-              CustomButton(
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
+              BlocListener<AuthCubit, AuthCubitState>(
+                listener: (context, state) {
+                  if (state is AuthCubitLoading) {
+                    setState(() => isLoading = true);
+                  } else if (state is AuthCubitSuccess) {
+                    setState(() => isLoading = false);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Register successfully")),
                     );
+                  }else if (state is AuthCubitError) {
+                    setState(() => isLoading = false);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.message)),
+                    );
                   }
                 },
-                text: "Register",
-                loading: isLoading,
+                child: CustomButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Register successfully")),
+                      );
+                    }
+                  },
+                  text: "Register",
+                  loading: isLoading,
+                ),
               ),
               Footer(
                 firstText: "Already have an account",
