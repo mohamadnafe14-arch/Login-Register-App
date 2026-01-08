@@ -113,11 +113,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("You have successfully logged in"),
-                        ),
-                      );
+                      BlocProvider.of<AuthCubit>(context).login(email: email!, password: password!);
                     }
                   },
                   loading: isLoading,

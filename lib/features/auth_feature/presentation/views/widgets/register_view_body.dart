@@ -154,20 +154,20 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Register successfully")),
                     );
-                  }else if (state is AuthCubitError) {
+                  } else if (state is AuthCubitError) {
                     setState(() => isLoading = false);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.message)),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.message)));
                   }
                 },
                 child: CustomButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Register successfully")),
-                      );
+                      BlocProvider.of<AuthCubit>(
+                        context,
+                      ).register(email: email!, password: password!);
                     }
                   },
                   text: "Register",
