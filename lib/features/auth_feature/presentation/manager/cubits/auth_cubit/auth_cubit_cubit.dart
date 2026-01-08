@@ -4,8 +4,8 @@ import 'package:meta/meta.dart';
 
 part 'auth_cubit_state.dart';
 
-class AuthCubitCubit extends Cubit<AuthCubitState> {
-  AuthCubitCubit(this.authRepo) : super(AuthCubitInitial());
+class AuthCubit extends Cubit<AuthCubitState> {
+  AuthCubit(this.authRepo) : super(AuthCubitInitial());
   final AuthRepo authRepo;
   void login() async {
     emit(AuthCubitLoading());
@@ -15,6 +15,7 @@ class AuthCubitCubit extends Cubit<AuthCubitState> {
       (user) => emit(AuthCubitSuccess()),
     );
   }
+
   void register() async {
     emit(AuthCubitLoading());
     final result = await authRepo.register("email", "password");
