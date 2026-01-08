@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:login_and_register_app/core/utils/app_router.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 void main() {
+   Firebase.initializeApp();
   runApp(const LoginAndRegisterApp());
 }
 
