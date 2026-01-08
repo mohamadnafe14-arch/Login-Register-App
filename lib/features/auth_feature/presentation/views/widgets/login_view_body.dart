@@ -1,6 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_button.dart';
+import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/footer.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -11,6 +13,7 @@ class LoginViewBody extends StatefulWidget {
 class _LoginViewBodyState extends State<LoginViewBody> {
   late GlobalKey<FormState> formKey;
   String? email, password;
+  bool isSecure = true;
   @override
   void initState() {
     formKey = GlobalKey<FormState>();
@@ -26,16 +29,37 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
             children: [
-              SizedBox(height: 100.h),
-              TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                  hint: const Text('Email'),
-                  prefixIcon: const Icon(Icons.email),
+              Text(
+                "Login and register app",
+                style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 20.h),
+              Text(
+                "Login to your account",
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
                 ),
-                obscureText: false,
+              ),
+              SizedBox(height: 20.h),
+              Divider(thickness: 1, color: Colors.grey.shade300),
+              SizedBox(height: 20.h),
+              Text(
+                "start",
+                style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
+              ),
+              Row(
+                children: const [
+                  Text(
+                    'Email',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.h),
+              CustomTextFormField(
+                hintText: "Enter your email",
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your email';
@@ -46,39 +70,52 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 },
                 onSaved: (value) => email = value,
                 onChanged: (value) => email = value,
+                prefixIcon: Icons.email,
+                isSecure: isSecure,
+                onTap: () => setState(() => isSecure = !isSecure),
               ),
               SizedBox(height: 20.h),
-              TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.r),
+              Row(
+                children: const [
+                  Text(
+                    'Password',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  hint: const Text('Password'),
-                  prefixIcon: const Icon(Icons.lock),
-                ),
-                obscureText: true,
+                ],
+              ),
+              SizedBox(height: 20.h),
+              CustomTextFormField(
+                hintText: "Enter your password",
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your password';
-                  }else if (value.length < 6) {
+                  } else if (value.length < 6) {
                     return "Password must be at least 6 characters";
                   }
                   return null;
                 },
                 onSaved: (value) => password = value,
+                onChanged: (value) => password = value,
+                prefixIcon: Icons.lock,
+                isSecure: isSecure,
+                onTap: () => setState(() => isSecure = !isSecure),
               ),
               SizedBox(height: 50.h),
-              ElevatedButton(
+              CustomButton(
+                text: "Login",
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
+                      SnackBar(
+                        content: Text("You have successfully logged in"),
+                      ),
                     );
                   }
                 },
-                child: const Text('Login'),
               ),
+              SizedBox(height: 20.h),
+              Footer(firstText: "No account?", secondeText: "Register", onPressed:(){})             
             ],
           ),
         ),
