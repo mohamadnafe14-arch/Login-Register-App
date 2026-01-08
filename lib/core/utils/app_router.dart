@@ -4,18 +4,21 @@ import 'package:login_and_register_app/features/auth_feature/presentation/views/
 import 'package:login_and_register_app/features/splash_feature/presentation/views/splash_view.dart';
 
 class AppRouter {
-  final router = GoRouter(
+  static final String initialRoute = '/';
+  static final String loginRoute = '/login';
+  static final String registerRoute = '/register';
+ static final router = GoRouter(
     routes: [
       GoRoute(
-        path: '/',
+        path: initialRoute,
         builder: (context, state) => const SplashView(),
       ),
       GoRoute(
-        path: '/login',
+        path: loginRoute,
         builder: (context, state) => const LoginView(),
       ),
       GoRoute(
-        path: '/register',
+        path: registerRoute,
         builder: (context, state) => const RegisterView(),
       ),
     ],

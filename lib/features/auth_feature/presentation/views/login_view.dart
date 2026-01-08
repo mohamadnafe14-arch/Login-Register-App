@@ -6,8 +6,9 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold(
+        appBar: AppBar(title: Text('Login'), centerTitle: true),
         body: LoginViewBody(),
       ),
     );

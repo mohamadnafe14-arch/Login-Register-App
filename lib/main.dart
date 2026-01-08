@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:login_and_register_app/core/utils/app_router.dart';
 
 void main() {
   runApp(const LoginAndRegisterApp());
@@ -9,7 +11,16 @@ class LoginAndRegisterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: ThemeData.dark(),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      builder: (context, child) => child!,
+      splitScreenMode: true,
+      minTextAdapt: true,
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark(),
+        routerConfig: AppRouter.router,
+      ),
     );
   }
 }
