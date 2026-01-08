@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:login_and_register_app/core/utils/app_router.dart';
-import 'package:login_and_register_app/features/auth_feature/presentation/manager/cubits/auth_cubit/auth_cubit_cubit.dart';
+import 'package:login_and_register_app/features/auth_feature/presentation/manager/cubits/auth_cubit/auth_cubit.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_app_bar.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_button.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_text_form_field.dart';
@@ -35,6 +35,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
             children: [
+              SizedBox(height: 40.h),
               CustomAppBar(title: "Login"),
               Row(
                 children: const [
@@ -59,7 +60,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 onChanged: (value) => email = value,
                 prefixIcon: Icons.email,
                 isSecure: isSecure,
-                onTap: () => setState(() => isSecure = !isSecure),
               ),
               SizedBox(height: 20.h),
               Row(
@@ -99,13 +99,11 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                         content: Text("You have successfully logged in"),
                       ),
                     );
-                  }else if (state is AuthCubitError) {
+                  } else if (state is AuthCubitError) {
                     setState(() => isLoading = false);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(state.message),
-                      ),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.message)));
                   }
                 },
                 child: CustomButton(
@@ -113,7 +111,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
-                      BlocProvider.of<AuthCubit>(context).login(email: email!, password: password!);
+                      BlocProvider.of<AuthCubit>(
+                        context,
+                      ).login(email: email!, password: password!);
                     }
                   },
                   loading: isLoading,

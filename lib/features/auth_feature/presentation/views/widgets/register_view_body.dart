@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:login_and_register_app/core/utils/app_router.dart';
-import 'package:login_and_register_app/features/auth_feature/presentation/manager/cubits/auth_cubit/auth_cubit_cubit.dart';
+import 'package:login_and_register_app/features/auth_feature/presentation/manager/cubits/auth_cubit/auth_cubit.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_app_bar.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_button.dart';
 import 'package:login_and_register_app/features/auth_feature/presentation/views/widgets/custom_text_form_field.dart';
@@ -20,10 +20,20 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   late GlobalKey<FormState> formKey;
   String? email, name, password, confirmPassword;
   bool isSecure = true, isConfirmSecure = true, isLoading = false;
+  final TextEditingController passwordController = TextEditingController(),
+      confirmPasswordController = TextEditingController();
   @override
   void initState() {
     formKey = GlobalKey<FormState>();
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -102,10 +112,13 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               ),
               SizedBox(height: 20.h),
               CustomTextFormField(
+                controller: passwordController,
                 hintText: "Enter your password",
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your password';
+                  } else if (value.length < 6) {
+                    return 'password must be at least 6 characters';
                   }
                   return null;
                 },
@@ -129,11 +142,12 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               ),
               SizedBox(height: 20.h),
               CustomTextFormField(
+                controller: confirmPasswordController,
                 hintText: "confirm your password",
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your confirm password';
-                  } else if (value != password) {
+                  } else if (value != passwordController.text) {
                     return 'password not match';
                   }
                   return null;
